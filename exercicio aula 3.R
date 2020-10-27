@@ -1,6 +1,6 @@
 rm(list = ls())
 
-load("testeAlunosmodulo3.Rdata")
+load("./Database/Modulo3_AlunosNotas.Rdata")
 
 
 class(AlunosNotas)
