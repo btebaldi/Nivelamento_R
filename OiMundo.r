@@ -1,5 +1,9 @@
+rm(list = ls())
 
-for (i in 1:10) {
-  print(paste("Oi Mundo", i))
-}
+library(readxl)
+
+
+
+covid_data$date = as.Date(covid_data$date)
+
 
