@@ -1,115 +1,118 @@
-
-# Setup -------------------------------------------------------------------
-
-rm(list = ls())
-
-
-# Bibliotecas -------------------------------------------------------------
-
+# Carrega as bibliotecas
 library(tidyverse)
 
+# Mostra a base de dados 
+View(mpg)
 
-# Banco de dados ----------------------------------------------------------
-
-mpg
-
-
-# Exercicios --------------------------------------------------------------
-
-# Execute o comando abaixo, O que voce ve?
-ggplot(data = mpg)
-
-
-# Quantas linhas existem em mtcars? Quantas colunas?
-mpg
-
-# Faca um grafico de dispersao de hwy versus cyl.
+# Faz um grafico de pontos com as seguintes caracteristicas:
+# 1) variavel displ no eixo x
+# 2) variavel hwy no eixo y
+# 3) utiliza o banco mpg
 ggplot(data = mpg) +
-  geom_point(mapping = aes(x=hwy, y=cyl))
+  geom_point(mapping = aes(x=displ, y=hwy))
 
-# O que acontece se voce fizer um grafico de dispersao de classe versus drv? Por
-# que esse grafico nao e util?
-ggplot(data = mpg) +
-  geom_point(mapping = aes(x=class, y=drv))
+# Faz um grafico de pontos com as seguintes caracteristicas:
+# 1) variavel "hwy" no eixo x
+# 2) variavel "cyl" no eixo y
+# 3) utiliza o banco mpg
+ggplot(data=mpg) +
+  geom_point(mapping = aes(x=hwy, y = cyl))
+
+# Faz um grafico de pontos com as seguintes caracteristicas:
+# 1) variavel "class" no eixo x
+# 2) variavel "drv" no eixo y
+# 3) utiliza o banco mpg
+ggplot(data=mpg) +
+  geom_point(mapping = aes(x=class, y = drv))
+
+# Faz um grafico de pontos com as seguintes caracteristicas:
+# 1) variavel "displ" no eixo x
+# 2) variavel "hwy" no eixo y
+# 3) utiliza o banco mpg
+# 4) Colorindo pela variavel "class" 
+ggplot(data=mpg) +
+  geom_point(mapping = aes(x=displ, y=hwy, colour=class))
+
+# Faz um grafico de pontos com as seguintes caracteristicas:
+# 1) variavel "displ" no eixo x
+# 2) variavel "hwy" no eixo y
+# 3) utiliza o banco mpg
+# 4) Colorindo de azul com transparencia de 30%
+ggplot(data=mpg) +
+  geom_point(mapping = aes(x=displ, y=hwy),
+             colour="blue",
+             alpha = 0.3)
 
 
-
-
-# Grafico dos slides ------------------------------------------------------
-
-ggplot(data = mpg) + geom_point( mapping = aes( x = displ, y = hwy, color = class))
-
-
-ggplot(data = mpg) + geom_point(mapping = aes(x = displ, y = hwy)) +
-  facet_wrap( ~ class, nrow = 2)
-
-
-ggplot(data = mpg) + geom_line(mapping = aes(x = displ, y = hwy))
-
-ggplot(data = diamonds) + geom_bar(mapping = aes(x = cut))
-
-ggplot(data = diamonds) + geom_histogram(mapping = aes(x = carat))
-
-ggplot(data = mpg) + geom_boxplot(mapping = aes(x = class, y = hwy))
-
-ggplot(data = mpg) +
-  geom_line(mapping = aes(x = displ, y = hwy)) +
-  geom_point(mapping = aes(x = displ, y = hwy))
-
+# Faz um grafico de pontos com as seguintes caracteristicas:
+# 1) variavel "displ" no eixo x
+# 2) variavel "hwy" no eixo y
+# 3) utiliza o banco mpg
+# 4) Dividindo por facetas de acordo com a variavel "class" 
 ggplot(data = mpg) +
   geom_point(mapping = aes(x = displ, y = hwy)) +
-  labs(title="Titulo", subtitle = "segundo titulo",
-       x= "eixo x", y="eixo y",caption = "caption")
+  facet_wrap( ~ class, nrow = 3)
 
-# utilizando o banco de dados mpg, faca um grafico de barras da variavel fl.
+# Faz um grafico de linha com as seguintes caracteristicas:
+# 1) variavel "displ" no eixo x
+# 2) variavel "hwy" no eixo y
+# 3) utiliza o banco mpg
 ggplot(data = mpg) +
-  geom_bar(mapping = aes(x = fl)) +
-  labs(title="Fuel type",
-       subtitle = "Fuel Economy Data From 1999 To 2008 For 38 Popular Models Of Cars",
-       x = NULL,
-       y = NULL,
-       caption = "e = ethanol, d = diesel, r = regular, p = premium, c = natural gas")
+  geom_line(mapping = aes(x = displ, y = hwy)) 
 
-# utilizando o banco de dados mpg, faca um histograma da variavel displ.
-ggplot(data = mpg) +
-  geom_histogram(mapping = aes(x = displ), bins = 20) +
-  labs(title="Engine displacement, in litres",
-       subtitle = "Fuel Economy Data From 1999 To 2008 For 38 Popular Models Of Cars",
-       x = NULL,
-       y = NULL,
-       caption = NULL)
-
-# utilizando o banco de dados mpg, faca um boxplot da variavel displ segregada
-# por fl.
-ggplot(data = mpg) +
-  geom_boxplot(mapping = aes(x = fl, y=displ)) +
-  labs(title="Engine displacement, in litres",
-       subtitle = "Fuel Economy Data From 1999 To 2008 For 38 Popular Models Of Cars",
-       x = NULL,
-       y = NULL,
-       caption = "e = ethanol, d = diesel, r = regular, p = premium, c = natural gas")
+# Faz um grafico de barras com as seguintes caracteristicas:
+# 1) variavel "class" no eixo x
+# 2) no eixo y sera a frequencia absoluta da variavel
+# 3) utiliza o banco mpg
+ggplot(data=mpg) +
+  geom_bar(mapping = aes(x=class))
 
 
-# Exercicio 3 -------------------------------------------------------------
+# Faz um grafico de Histograma com as seguintes caracteristicas:
+# 1) variavel "hwy" no eixo x
+# 2) No eixo y sera mostrado a densidade
+# 3) utiliza o banco mpg
+ggplot(data=mpg) +
+  geom_histogram(mapping = aes(x=hwy, y = ..density..))
 
-# utilizando o banco de dados diamonds, faca um histograma carat, separado em
-# facetas da variavel color.
-ggplot(data = diamonds) +
-  geom_histogram(aes(x=carat)) +
-  facet_wrap(~color)
-  
-
-# utilizando o banco de dados diamonds, faca um grafico de barras da variavel
-# color, e complemente a estetica indicando que o preenchimento das barras deve
-# ser feito de acordom com a variavel color ("aes(x = color, fill=color)").
-ggplot(data = diamonds) +
-  geom_histogram(aes(x=carat)) +
-  facet_wrap(~color)
+# Faz um grafico de caixa (boxplot) com as seguintes caracteristicas:
+# 1) variavel "class" no eixo x
+# 2) variavel "hwy" no eixo x
+# 3) utiliza o banco mpg
+ggplot(data=mpg) +
+  geom_boxplot(mapping = aes(x=class, y=hwy))
 
 
-# utilizando o banco de dados diamonds, faca um grafico de dispersao, de carat"
-# por price", e colorido pela variaavel color".
-ggplot(data = diamonds) +
-  geom_point(aes(x=carat, y=price, colour=color))
+
+
+# Faz um grafico com duas camadas:
+#     Ambas as camadas utilizam o banco mpg
+# CAMADA 1 (Grafico de linha)
+#     1) variavel "displ" no eixo x
+#     2) variavel "hwy" no eixo x
+# CAMADA 2 (Grafico de pontos)
+#     1) variavel "displ" no eixo x
+#     2) variavel "hwy" no eixo x
+#     2) Colorido por "class"
+# 
+# O comando labs() informa os titulos, subtitulos e nome dos eixos, etc
+ggplot(data=mpg) +
+  geom_line(mapping = aes(x=displ, y=hwy)) +
+  geom_point(mapping = aes(x=displ, y=hwy, colour=class)) +
+  labs(title = "Titulo do meu grafico",
+       subtitle = "Subtitulo do Grafico",
+       caption = "Fonte: banco de dados mpg",
+       x="NOME DO EIXO X",
+       y=NULL)
+
+# Salva o ultimo grafico criado
+ggsave(filename = "./graficos/Aula 1.png",
+       units = "in",
+       width = 8, height = 6,
+       dpi = 100)
+
+
+
+
 
 

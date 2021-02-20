@@ -8,7 +8,7 @@ x <- "dataset"
 typeof(x)
 # [1] "character"
 
-y <- 1:10
+y = 1:10
 y
 # [1] 1 2 3 4 5 6 7 8 9 10
 
@@ -46,7 +46,7 @@ length(y)
 
 
 # Dados Especiais ---------------------------------------------------------
-x <- c(1, 2 , NA, 4, 5, Inf)
+x <- c(1, 2 , NA, 4, 5, Inf, -Inf)
 
 x
 # [1] 1 2 NA 4 5 Inf
@@ -71,7 +71,7 @@ m
 class(m)
 # [1] "matrix" "array"
 
-m <- matrix(c(1:3))
+m <- matrix(c(1:6), ncol = 4, nrow = 3, byrow = TRUE)
 m
 # [,1]
 # [1,] 1
@@ -81,9 +81,14 @@ m
 class(m)
 # [1] "matrix" "array"
 
+typeof(m)
+
+m2=matrix(c(x, y))
+class(m2)
+typeof(m2)
 
 # Lista -------------------------------------------------------------------
-x <- list(1, "a", TRUE, 1+4i)
+x <- list("Entrada1"=c(1:4), "a", TRUE,"Entrada4"= 1+4i)
 
 x
 # [[1]]
@@ -94,10 +99,16 @@ x
 # [1] TRUE
 # [[4]]
 # [1] 1+4i
+class(x)
+
+x$Entrada1
 
 
 # Data frame --------------------------------------------------------------
 dat <- data.frame(id = letters[1:10], x = 1:10, y = 11:20)
+
+colnames(dat) = c("Coluna 1", "Coluna 2", "Coluna 3")
+
 dat
 # id x y
 # 1 a 1 11
@@ -114,13 +125,31 @@ dat
 dat[1, 3] # linha 1; coluna 3 do data frame
 # [1] 11
 
-dat[4, "id"] # linha 1; coluna "id" do data frame
+
+dat[3,]
+
+dat[,3]
+
+xx = dat[  ,  "Coluna 2"]
+yy = dat["Coluna 2"  ]
+
+class(xx)
+class(yy)
+
+yy$`Coluna 2`
+
+dat[4, "Coluna 1"] # linha 1; coluna "id" do data frame
 # [1] "d"
 
+sample(c("a", "b", "c"), size = 4, replace = TRUE)
+
+dim(dat)
+dim(m)
 
 # Tibble ------------------------------------------------------------------
 library(tibble)
-dat <- tibble(id = letters[1:5], x = 1:5, y = 11:15)
+
+dat <- tibble(id = letters[1:25], x = 1:25, y = 1:25)
 
 dat
 # # A tibble: 10 x 3
@@ -141,7 +170,6 @@ y <- 16
 
 x+y
 # [1] 21
-
 x-y
 # [1] -11
 
@@ -163,7 +191,10 @@ y^x
 
 # Operadores relacionais --------------------------------------------------
 x <- 5
-y <- 16
+y = 16
+
+y == 17
+y == 16
 
 x>y
 # [1] FALSE
@@ -191,7 +222,7 @@ x!=y
 x <- c(TRUE,FALSE,0,6)
 y <- c(FALSE,TRUE,FALSE,TRUE)
 
-!x
+!!x
 # [1] FALSE TRUE TRUE FALSE
 
 x&y
@@ -237,6 +268,11 @@ x+c(1,2,3)
 
 
 # Operadores de atribuicao ------------------------------------------------
+x=5
+y=6
+
+x<-y
+
 
 x <- 5
 x
@@ -253,7 +289,6 @@ x
 
 # Exercicio ---------------------------------------------------------------
 
-
 # Suponha que voce esta matriculado na disciplina de estatistica. E voce quer
 # calcular a sua media de aprovacao. O criterio de aprovacao e
 # Media = 0.10 LT + 0.15 TR + 0.25 P1 + 0.5 P2
@@ -262,28 +297,37 @@ x
 # P2 = 5.0
 
 # item 1)
-nomes <- c("LT", "TR", "P1", "P2")
+nomes = c("LT", "TR", "P1", "P2")
 
 # item 2)
 notas <- c(5, 8, 6, 5)
 
 # item 3)
-pesos <- c(0.1, 0.15, 0.25, 0.5)
+pesos = c(0.1, 0.15, 0.25, 0.5)
 
 # item 4)
-resultado <- pesos*notas
+result = pesos * notas
 
 # item 5)
-tabela <- data.frame(Avaliacao = nomes, Peso = pesos, Nota= notas, subtotal=resultado)
+tabela = data.frame(Avaliacao = nomes,
+                    Peso = pesos,
+                    Nota = notas,
+                    SubTotal = result)
+
 
 # item 6)
-MediaFinal <- sum(tabela$subtotal)
+MediaFinal = tabela$SubTotal[1] + tabela$SubTotal[2] +
+  tabela$SubTotal[3] +tabela$SubTotal[4]
+
 MediaFinal
 
+# outro metodo
+sum(tabela$SubTotal)
+
 # item 7)
-tabela[4, "Nota"] = 6
-tabela$subtotal = tabela$Nota * tabela$Peso
-MediaFinal <- sum(tabela$subtotal)
+tabela$Nota[4] = 6
+tabela$SubTotal = tabela$Peso * tabela$Nota
+MediaFinal = sum(tabela$SubTotal)
 MediaFinal
 
 # Funcoes matriciais basicas ----------------------------------------------
@@ -306,6 +350,8 @@ t(mat)
 # [1,] 1 2 3
 # [2,] 4 5 6
 
+mat %*% t(mat)
+
 
 # Funcoes de data.frame basicas -------------------------------------------
 dat = data.frame(id = 1:4, nome=c("paulo", "maria", "joao", "bruno"), aprovado = c(T,F, F, T))
@@ -324,11 +370,18 @@ dat[4, c(2, 3)]
 # nome aprovado
 # 4 bruno TRUE
 
+dat[-3, c(2, 3)]
+
+dat[c(1,3), -c(1, 3)]
+
+
+cbind(dat,dat)
+rbind(dat,dat)
 
 
 # if/else -----------------------------------------------------------------
 
-ano = 2029
+ano = 2019
 if (ano == 2020) {
   print("2020 e o 1o ano da pandemia")
 } else if (ano > 2020) {
@@ -356,35 +409,50 @@ for (val in 1:10) {
 # [1] 9
 # [1] 10
 
+nomes = c("bruno", "pedro", "joao")
+
+for(i in nomes){
+  
+  print(i)
+  # print(runif(1))
+  
+  # cat(sprintf("Nome da pessoa: %s\t%f\n", aluno, runif(1)))
+}
+
+
 
 # Example -----------------------------------------------------------------
 
 # 1) Crie um for loop que faz a soma dos numeros de 1 a 42.
-soma=0
-for(number in 1:42){
-  soma=soma+number
+
+for(numero in 1:42){
+  if(numero == 1){
+    soma = numero 
+  } else {
+    soma = soma + numero
+  }
 }
-soma
+print(soma)
 
 # 2) Crie um vetor com 5 nomes. Faca um for loop que imprima
-nomes <- paste("nome", 1:5)
-for(nome in nomes){
-  print(nome)
-}
+nomes = c("a", "b", "c", "d ", "e")
 
+for(j in nomes){
+  print(j)
+}
 
 # 3) Crie um vetor com os numeros de 1 a 10. Faca um for loop que imprima todos
 # o exponencial de cada numero.
-numeros <- 1:10
-for(num in numeros){
-  print(exp(num))
+vetor <- 1:10
+for(numero in vetor){
+  print(exp(numero))
 }
 
 
 # While -------------------------------------------------------------------
 
 number = 0
-while (number < 3)
+while (number < 30)
 {
   print(number)
   number = number +1
@@ -402,8 +470,8 @@ soma=0
 while (number <= 42)
 {
   print(number)
-  soma=soma+number
-  number = number +1
+  soma = soma + number
+  number = number + 1
 }
 soma
 number
@@ -411,7 +479,9 @@ number
 # 2) crie um while looping que dado um numero (escolhido previamente),
 # inteiro, ele faz a adicao ou subtracao de uma unidade (+/- 1) a cada
 # interacao, ate atingir o numero 42.
-number = 1
+
+# Escolha do usuario
+number = 15000
 
 while (number != 42)
 {
@@ -420,7 +490,7 @@ while (number != 42)
     number = number - 1
   } else if (number < 42) {
     number = number + 1
-  } else {cat("????")}
+  } else {print("????")}
 }
 number
 
@@ -437,9 +507,9 @@ for (number in 1:100)
     print("pulando o 2")
     next
   }
-  if(number == 4)
+  if(number == 10)
   {
-    print("Parando no 4")
+    print("Parando no 10")
     break
   }
   print(number)
@@ -448,6 +518,27 @@ for (number in 1:100)
 # [1] "pulando o 2"
 # [1] 3
 # [1] "Parando no 4"
+
+for (number in 1:100)
+{
+  resto = number %% 3
+  
+  # toda vez que o resto é zero o numero é par
+  if(resto == 0)
+  {
+    print(sprintf("O numero %d é divisivel por 3", number))
+  } else {
+    print(sprintf("O numero %d NAO é divisivel por 3",number))
+    next
+  }
+  cat(sprintf(" Numero escolhido\n"))
+}
+
+
+
+
+
+
 
 
 # Exercicio ---------------------------------------------------------------
