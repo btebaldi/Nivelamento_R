@@ -7,7 +7,8 @@ rm(list = ls())
 
 # Bibliotecas -------------------------------------------------------------
 library(dplyr)
-
+library(ggplot2)
+library(here)
 
 
 # Vamos escrever a função a ser integrada
@@ -23,9 +24,10 @@ b <- 1.95
 
 if(a == b) { stop("ERRO: pontos 'a' e 'b' são iguais!")}
 
+N=10
 
 # Vamos dividir nosso intervalo
-intervalo <- seq(from=min(a,b), to=max(a,b), by=0.001)
+intervalo <- seq(from=min(a,b), to=max(a,b), length.out = N)
 
 # Por questoes didaticas vamos organizar os dados em um data.frame
 data <- data.frame(inf = intervalo[-length(intervalo)],
@@ -42,6 +44,14 @@ data$f = Normal.pdf(data$med)
 
 # Calculamos a soma de Reimann
 Integral = sum(data$f * (data$sup - data$inf))
+
+curvaNormal <- data.frame(x=seq(from=-4, to=4, by=0.001), y=dnorm(seq(from=-4, to=4, by=0.001)))
+
+
+ggplot(data) +
+  geom_rect(aes(xmin=inf, xmax=sup, ymin=0, ymax=f), fill="blue", alpha =0.3, data=data) + 
+  geom_line(aes(x=x, y=y), data= curvaNormal)
+
 
 
 cat(sprintf("Integral numerica calculada: %8.6f
