@@ -1,5 +1,5 @@
 # Script DataLoader.r
-
+library(readxl)
 
 # Carrega a base de dados
 covid_data <- read_excel("databases/owid-covid-data.xlsx",

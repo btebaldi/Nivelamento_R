@@ -1,21 +1,13 @@
-# Script logic
-
-
 # Setup -------------------------------------------------------------------
-
-# Clear all
 rm(list = ls())
-
 library(dplyr)
 library(ggplot2)
 
 
 # Funcoes -----------------------------------------------------------------
-
 source("./lib/get_weekNumber.R")
 
 # Data Loader -------------------------------------------------------------
-
 source("./lib/Dataloader.r")
 
 dates_table <- get_weekNumber(covid_data$date)
@@ -61,3 +53,4 @@ ggsave(filename = "grafico 2.png",
        plot = g2,
        scale=1, units = "in", dpi = 300,
        width = 10.4, height = 5.85)
+
