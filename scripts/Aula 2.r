@@ -608,3 +608,12 @@ AlunosNotas$MF <- AlunosNotas$TR*pesos["TR"] +
   AlunosNotas$P2*pesos["P2"]
 
 sum(AlunosNotas$MF >= 6)
+
+
+
+ggplot(AlunosNotas) +
+  geom_histogram(mapping = aes(x=MF), bins = 10,
+                 fill="blue", alpha=0.4) +
+  labs(title = "Distribuicao da media final",
+       x = "Nota",
+       y = NULL)
