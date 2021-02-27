@@ -585,19 +585,26 @@ summary(AlunosNotas)
 # AlunosNotas, e calcula a nota para cada aluno. Guarde a media calculada na
 # coluna MF.
 for(row in 1: nrow(AlunosNotas)){
-  AlunosNotas$MF <- AlunosNotas$TR[row]*pesos["TR"] + 
+  AlunosNotas$MF[row] <- AlunosNotas$TR[row]*pesos["TR"] + 
     AlunosNotas$LT[row]*pesos["LT"] + 
     AlunosNotas$P1[row]*pesos["P1"] + 
     AlunosNotas$P2[row]*pesos["P2"]
 }
 
 # 11) Determine qual a quantidade de alunos que foram aprovados.
+sum(AlunosNotas$MF >= 6)
+
 
 # 12) Suponha que agora o professor altere os pesos para \TR = 10",
 # \LT=15", \P1=50", \P2=50". Qual a quantidade de alunos aprovados
 # com esses pesos?
 
+pesos <- c(TR =10,LT=15,P1=50,P2=50)
+pesos <- pesos/sum(pesos)
 
+AlunosNotas$MF <- AlunosNotas$TR*pesos["TR"] + 
+  AlunosNotas$LT*pesos["LT"] + 
+  AlunosNotas$P1*pesos["P1"] + 
+  AlunosNotas$P2*pesos["P2"]
 
-
-
+sum(AlunosNotas$MF >= 6)

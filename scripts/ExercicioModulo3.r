@@ -57,6 +57,3 @@ ggplot(AlunosNotas) +
        y = NULL)
 
 
-
-
-
