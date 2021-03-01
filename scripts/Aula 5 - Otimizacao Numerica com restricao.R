@@ -107,6 +107,5 @@ b <- opt.mdl$par[2]
 x <- a^0.5
 y <- b^0.5
 
-f.min(c(x,y))
 cat(sprintf("MODELO 3\n---------------\nX: %.2f\nY: %.2f", x, y))
 
