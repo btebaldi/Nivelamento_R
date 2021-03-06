@@ -1,3 +1,4 @@
+# Script OiMundo.r
 rm(list = ls())
 frase <- sprintf("%s\nOi mundo\n%s\n",
                  paste(rep("*", 20), collapse = ""),
