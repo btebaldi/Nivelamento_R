@@ -11,11 +11,11 @@ f.min <- function(param){
   return(ret)
 }
 
-restrictions <- matrix(c(-2,-3,1,0,0,1), ncol=2, nrow = 3, byrow = TRUE)
+restrictions <- matrix(c(-2,-3, 1, 0, 0, 1), ncol=2, nrow = 3, byrow = TRUE)
 colnames(restrictions) <- c("X", "Y")
 values <- matrix(c(-300,0,0), ncol=1, nrow = 3)
 
-theta <-  c(1,1)
+theta <-  c(1, 1)
 
 # ui %*% theta - ci >= 0
 restrictions %*% theta - values
@@ -52,7 +52,7 @@ f.min <- function(param){
 theta <- c(1)
 
 # TESTE SEM GRADIENTE
-optim(theta, f.min)
+optim(theta, f.min, method = "BFGS")
 
 # TESTE COM GRADIENTE
 f.grad <- function(param){
