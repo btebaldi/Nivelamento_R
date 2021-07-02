@@ -1,0 +1,55 @@
+rm(list = ls())
+
+pck <- c("astsa", 
+         "bizdays", 
+         "broom", 
+         "caret", 
+         "cowplot", 
+         "data.table", 
+         "dlm", 
+         "dplyr", 
+         "e1071", 
+         "elasticnet", 
+         "fmsb", 
+         "forcats", 
+         "ggplot2", 
+         "glmnet", 
+         "lmtest", 
+         "lubridate", 
+         "magrittr", 
+         "MASS", 
+         "MTS", 
+         "mvtnorm", 
+         "forecast", 
+         "nlme", 
+         "plm", 
+         "randomForest", 
+         "RColorBrewer", 
+         "readr", 
+         "readxl", 
+         "rstudioapi", 
+         "rugarch", 
+         "sandwich", 
+         "tibble", 
+         "tidyr", 
+         "timeSeries", 
+         "TSA", 
+         "tsDyn", 
+         "tseries", 
+         "tseriesChaos", 
+         "urca", 
+         "vars", 
+         "wooldridge", 
+         "xgboost", 
+         "xts", 
+         "zoo",
+         "sidrar",
+         "stringi",
+         "stringr")
+
+x <- readline("Instalar pacotes? [Yes/No]")
+if(x == "Yes"){
+  cat(sprintf("\nInstalando os pacotes.\n"))
+  install.packages(pck)
+}
+
