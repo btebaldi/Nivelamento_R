@@ -15,7 +15,7 @@ cambio_PIB$Data <- as.Date(cambio_PIB$Data)
 
 # Grafico dois eixos ------------------------------------------------------
 
-ggplot(cambio_PIB) +
+ggplot(data = cambio_PIB) +
   geom_line(aes(x=Data, y=PIB, colour= "PIB")) +
   geom_line(aes(x=Data, y=Cambio, colour="Cambio")) +
   labs(title = "Pib e Cambio")  
