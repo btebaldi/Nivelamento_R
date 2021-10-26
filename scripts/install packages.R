@@ -57,8 +57,10 @@ pck_list <- c(
   "nlme", 
   "rstudioapi", 
   "tseriesChaos", 
-  "fpc", # Machine Learning K Means Clustering
-  "plotly"  # 3d ploting
+  "fpc",          # Machine Learning K Means Clustering
+  "plotly",       # 3d ploting
+  "readxlsb"      # leitura de planilhas xlsb
+
 )
 
 
