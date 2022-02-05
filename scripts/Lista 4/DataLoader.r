@@ -50,12 +50,16 @@ covid_data <- readxl::read_excel("./databases/owid-covid-data.xlsx",
                                                "numeric",         # total_vaccinations
                                                "numeric",         # people_vaccinated
                                                "numeric",         # people_fully_vaccinated
+                                               "numeric",         # total_boosters
                                                "numeric",         # new_vaccinations
                                                "numeric",         # new_vaccinations_smoothed
                                                "numeric",         # total_vaccinations_per_hundred
                                                "numeric",         # people_vaccinated_per_hundred
                                                "numeric",         # people_fully_vaccinated_per_hundred
+                                               "numeric",         # total_boosters_per_hundred
                                                "numeric",         # new_vaccinations_smoothed_per_million
+                                               "numeric",         # new_people_vaccinated_smoothed
+                                               "numeric",         # new_people_vaccinated_smoothed_per_hundred
                                                "numeric",         # stringency_index
                                                "numeric",         # population
                                                "numeric",         # population_density
@@ -71,7 +75,12 @@ covid_data <- readxl::read_excel("./databases/owid-covid-data.xlsx",
                                                "numeric",         # handwashing_facilities
                                                "numeric",         # hospital_beds_per_thousand
                                                "numeric",         # life_expectancy
-                                               "numeric"          # human_development_index
+                                               "numeric",         # human_development_index
+                                               "numeric",         # excess_mortality_cumulative_absolute
+                                               "numeric",         # excess_mortality_cumulative
+                                               "numeric",         # excess_mortality
+                                               "numeric"          # excess_mortality_cumulative_per_million
+                                               
                                  ))
 
 
