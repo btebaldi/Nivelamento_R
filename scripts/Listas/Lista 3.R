@@ -19,6 +19,8 @@ head(GER_Price)
 # Questao 2 ---------------------------------------------------------------
 
 library(dplyr)
+library(lubridate)
+
 GER_PI$Ano <- lubridate::year(GER_PI$data)
 GER_PI.grouped <- dplyr::group_by(GER_PI, Ano)
 GER_PI.Anual <- dplyr::summarise(GER_PI.grouped, ProdIndAnual=mean(prodInd))
