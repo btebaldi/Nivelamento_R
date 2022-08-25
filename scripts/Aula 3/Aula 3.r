@@ -155,3 +155,11 @@ write_excel_csv(x = tabela.Completa,
 
 
 
+library(writexl)
+
+lista_de_tabelas <- list("ABA_1" = tabela.Completa,
+                        "ABA_2" = tbl.longer)
+
+writexl::write_xlsx(x = lista_de_tabelas,
+          path = "./dev/ArquivoTesteAlunosNota.xlsx")
+
