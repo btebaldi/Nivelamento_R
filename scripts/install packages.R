@@ -21,6 +21,7 @@ pck_list <- c(
   "cowplot",      # Pacore para ajuste de Gaficos
   "rvest",        # Web Scrapping
   "writexl",      # Permite exportar tabelas para arquivos em excel.
+  "openxlsx",
   
   # Desejavel
   "zoo",          # Pacote base para Time Series
