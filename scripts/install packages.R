@@ -20,6 +20,7 @@ pck_list <- c(
   "vars",         # Analise de modelos VAR e VECM (muito bom!)
   "cowplot",      # Pacore para ajuste de Gaficos
   "rvest",        # Web Scrapping
+  "writexl",      # Permite exportar tabelas para arquivos em excel.
   
   # Desejavel
   "zoo",          # Pacote base para Time Series
