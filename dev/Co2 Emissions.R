@@ -23,7 +23,9 @@ url <- "https://www.worldometers.info/co2-emissions/co2-emissions-by-country/"
 HtmlPage <- read_html(x = url)
 
 # Interpretação da tabela
-tbl <- HtmlPage %>% html_nodes(xpath='//table[@id="example2"]') %>% rvest::html_table()
+tbl <- HtmlPage %>%
+  html_nodes(xpath='//table[@id="example2"]') %>%
+  rvest::html_table()
 
 # Investigação do retorno
 class(tbl)
@@ -68,12 +70,16 @@ summary(mdl)
 
 # Grafico dos dados
 ggplot(tbl) + 
-  geom_point(aes(y = lnCo2, x = lnPop), alpha=0.3, size = 2 , colour="red") + 
+  geom_point(aes(y = CO2, x = Population), alpha=0.3, size = 2 , colour="red") + 
   geom_abline(slope = mdl$coefficients[2], intercept = mdl$coefficients[1], colour = "blue", size = 1) +
   labs(title ="CO2 Emissions",
        x="population [log]",
        y='CO2 Emission [log]')
 
-
-
+ggplot(tbl) + 
+  geom_point(aes(y = lnCo2, x = lnPop), alpha=0.3, size = 2 , colour="red") + 
+  geom_abline(slope = mdl$coefficients[2], intercept = mdl$coefficients[1], colour = "blue", size = 1) +
+  labs(title ="CO2 Emissions",
+       x="population [log]",
+       y='CO2 Emission [log]')
 

@@ -1,21 +1,20 @@
+#' Author: Bruno Tebaldi de Queiroz Barbosa
+#'
+#' Data: 2023-02-04
+#'
+#' Cria um grafico de correlação
+
+# Setup -------------------------------------------------------------------
+
+rm(list=ls())
+
 library(dplyr)
 library(tidyr)
 library(ggplot2)
 
-n <- 40
-
-# Create dataset
-data <- data.frame(
-  id=seq(1,n),
-  individual=paste( "Mister ", seq(1,n), sep=""),
-   value=sample( seq(10,100), n, replace=T),
-  value2=sample( seq(10,100), n, replace=T),
-  value3=sample( seq(10,100), n, replace=T)
-)
 
 
-data2 <- data %>%
-   pivot_longer(cols = starts_with("value"), names_to = "names", values_to = "value")
+# Load database -----------------------------------------------------------
 
 data2 <- mpg %>% 
   count(manufacturer, drv) %>% 
@@ -23,13 +22,16 @@ data2 <- mpg %>%
          value = n) %>% 
   arrange(manufacturer) %>% mutate(id=row_number())
 
-   
+View(data2)
+
+
+# Logic layer -------------------------------------------------------------
 
 # ----- This section prepare a dataframe for labels ---- #
 # Get the name and the y position of each label
 label_data <-  mpg %>% 
   count(manufacturer, drv) %>% pivot_wider(names_from = "drv", names_prefix = "D", values_from = "n", values_fill = 0) %>% 
- mutate(id=row_number(), Total = D4+Df+Dr)
+  mutate(id=row_number(), Total = D4+Df+Dr)
 
 
 # calculate the ANGLE of the labels
@@ -45,7 +47,7 @@ label_data$angle<-ifelse(angle < -90, angle+180, angle)
 # ----- ------------------------------------------- ---- #
 
 
-# Start the plot
+# Grafico -----------------------------------------------------------------
 p <- data2 %>% 
   ggplot( aes(x=manufacturer, y=value)) +       # Note that id is a factor. If x is numeric, there is some space between the first bar
   
@@ -80,4 +82,4 @@ p <- data2 %>%
             angle = label_data$angle,
             inherit.aes = FALSE ) 
 
-p
+print(p)

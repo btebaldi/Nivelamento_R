@@ -54,11 +54,11 @@ ggplot(data = mpg) +
   facet_wrap( ~ class, nrow = 3)
 
 # Faz um grafico de linha com as seguintes caracteristicas:
-# 1) variavel "displ" no eixo x
-# 2) variavel "hwy" no eixo y
-# 3) utiliza o banco mpg
-ggplot(data = mpg) +
-  geom_line(mapping = aes(x = displ, y = hwy)) 
+# 1) variavel "date" no eixo x
+# 2) variavel "uempmed" no eixo y
+# 3) utiliza o banco economics
+ggplot(data = economics) +
+  geom_line(mapping = aes(x = date, y = uempmed)) 
 
 # Faz um grafico de barras com as seguintes caracteristicas:
 # 1) variavel "class" no eixo x
@@ -74,6 +74,9 @@ ggplot(data=mpg) +
 # 3) utiliza o banco mpg
 ggplot(data=mpg) +
   geom_histogram(mapping = aes(x=hwy, y = ..density..))
+
+ggplot(data=mpg) +
+  geom_histogram(mapping = aes(x=hwy, y = after_stat(density)))
 
 # Faz um grafico de caixa (boxplot) com as seguintes caracteristicas:
 # 1) variavel "class" no eixo x
@@ -99,6 +102,16 @@ ggplot(data=mpg) +
 ggplot(data=mpg) +
   geom_line(mapping = aes(x=displ, y=hwy)) +
   geom_point(mapping = aes(x=displ, y=hwy, colour=class)) +
+  labs(title = "Titulo do meu grafico",
+       subtitle = "Subtitulo do Grafico",
+       caption = "Fonte: banco de dados mpg",
+       x="NOME DO EIXO X",
+       y=NULL)
+
+
+ggplot(data = economics) +
+  geom_line(mapping = aes(x=date, y=uempmed )) +
+  geom_point(mapping = aes(x=date, y=uempmed, colour=unemploy), alpha=0.3) +
   labs(title = "Titulo do meu grafico",
        subtitle = "Subtitulo do Grafico",
        caption = "Fonte: banco de dados mpg",

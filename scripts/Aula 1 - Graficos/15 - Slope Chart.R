@@ -1,12 +1,20 @@
+#' Author: Bruno Tebaldi de Queiroz Barbosa
+#'
+#' Data: 2023-02-04
+#'
+#' Cria um grafico de correlação
+
+
+# Setup -------------------------------------------------------------------
+
 rm(list=ls())
 library(ggplot2)
-# library(scales)
-# theme_set(theme_classic())
 
-# prep data
-df <- readRDS(file = "./databases/SlopePlot.rds")
+# Load database -----------------------------------------------------------
+df <- readRDS(file = "./databases/Aula 1/SlopePlot.rds")
 
 
+# Grafico -----------------------------------------------------------------
 ggplot(df) +
   geom_vline(xintercept=1, linetype="dashed", size=.1) + 
   geom_vline(xintercept=2, linetype="dashed", size=.1)
@@ -90,7 +98,6 @@ ggplot(df) +
   theme(axis.ticks = element_blank(),
         axis.text.x = element_blank(),
         plot.margin = unit(c(1,2,1,2), "cm"))
-
 
 
 ggsave(filename = "./Graficos/Aula 1/16_Slope.png",units = "in",

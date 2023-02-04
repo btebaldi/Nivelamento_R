@@ -1,13 +1,17 @@
+#' Author: Bruno Tebaldi de Queiroz Barbosa
+#'
+#' Data: 2023-02-04
+#'
+#' Cria um grafico com dois eixos
+
 
 # Setup -------------------------------------------------------------------
 
 rm(list=ls())
 
 library(ggplot2)
-library(readxl)
 
-
-# Loadatabse --------------------------------------------------------------
+# Load database -----------------------------------------------------------
 
 data(economics)
 

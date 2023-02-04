@@ -132,5 +132,5 @@ p <- ggplot(data) +
 
 # Save at png
 # ggsave(p, file="output.png", width=10, height=10)
-p
+
 

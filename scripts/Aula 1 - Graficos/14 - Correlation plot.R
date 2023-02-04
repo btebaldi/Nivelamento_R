@@ -1,11 +1,26 @@
+#' Author: Bruno Tebaldi de Queiroz Barbosa
+#'
+#' Data: 2023-02-04
+#'
+#' Cria um grafico de correlação
+
+
+# Setup -------------------------------------------------------------------
+
+rm(list=ls())
+
 library(ggplot2)
 library(ggcorrplot)
+
+
+# Load database -----------------------------------------------------------
 
 # Correlation matrix
 data(mtcars)
 corr <- round(cor(mtcars), 1)
 
-# Plot
+
+# Grafico -----------------------------------------------------------------
 ggcorrplot(corr,
            hc.order = TRUE, 
            type = "upper",
