@@ -1,5 +1,6 @@
 library(readxl)
-library(ggplot2)
+library(tidyverse)
+
 
 Industria <- read_excel("databases/Industria.xlsx")
 
@@ -48,6 +49,4 @@ tbl.com.previsao$IsPrevisao[175:186] = 1
 tbl.com.previsao %>% ggplot() + 
   geom_line(aes(x=periodo, y=D_Ind, colour = factor(IsPrevisao))) +
   labs(x="Data", y="Industria", colour="Legenda")
-
-
 

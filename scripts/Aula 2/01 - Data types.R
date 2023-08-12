@@ -6,11 +6,15 @@
 #' ---
 #' 
 
+# Setup -------------------------------------------------------------------
+rm(list=ls())
 
-#' ### 1. Logical Data Type
+# Logical Data Type -------------------------------------------------------
+
+#' ### Logical Data Type
 #'
-#' The logical data type in R is also known as boolean data type. It can only
-#' have two values: TRUE and FALSE. For example,
+#' O tipo de dado lógico em R também é conhecido como tipo de dado booleano. só
+#' pode tem dois valores: TRUE e FALSE.
 
 bool1 <- TRUE
 print(bool1)
@@ -23,11 +27,12 @@ print(class(bool2))
 
 
 
+# Numeric Data Type -------------------------------------------------------
 
-#' ### 2. Numeric Data Type
-#'
-#' In R, the numeric data type represents all real numbers with or without
-#' decimal values. For example,
+#' ### Numeric Data Type
+#' 
+#' Em R, o tipo de dado numérico representa todos os números reais com ou sem
+#'valores decimais.
 
 # floating point values
 weight <- 63.5
@@ -40,21 +45,26 @@ print(height)
 print(class(height))
 
 
-#' ### 3. Integer Data Type
+# Integer Data Type -------------------------------------------------------
+
+#' ### Integer Data Type
 #'
-#' The integer data type specifies real values without decimal points. We use
-#' the suffix L to specify integer data. For example,
+#' O tipo de dados integer especifica valores reais sem pontos decimais. Nós
+#' usamos o sufixo L para especificar dados inteiros.
 
 integer_variable <- 186L
 print(class(integer_variable))
 
-#' Here, 186L is an integer data. So we get "integer" when we print the class of
-#' integer_variable.
+#' 186L é um dado inteiro. Então, obtemos "inteiro" quando imprimimos a classe de
+#'variável_inteira.
 
-#' ### 4. Complex Data Type
+# Complex Data Type -------------------------------------------------------
+
+#' ### Complex Data Type
 #'
-#' The complex data type is used to specify purely imaginary values in R. We use
-#' the suffix i to specify the imaginary part. For example,
+#' O tipo de dado complexo é usado para especificar valores puramente
+#' imaginários em R. Usamos o sufixo i para especificar a parte imaginária.
+
 
 # 2i represents imaginary part
 complex_value <- 3 + 2i
@@ -63,19 +73,21 @@ complex_value <- 3 + 2i
 print(class(complex_value))
 
 
-#' Here, 3 + 2i is of complex data type because it has an imaginary part 2i.
+#' 3 + 2i é um tipo de dado complexo porque tem uma parte imaginária 2i.
 
-#' ### 5. Character Data Type
-#'
-#' The character data type is used to specify character or string values in a
-#' variable.
 
-#' In programming, a string is a set of characters. For example, 'A' is a single
-#' character and "Apple" is a string.
+# Character Data Type -----------------------------------------------------
+
+#' ### Character Data Type
 #'
-#' You can use single quotes '' or double quotes "" to represent strings. In
-#' general, we use: '' for character variables "" for string variables For
-#' example,
+#' O tipo de dados de caractere é usado para especificar valores de caractere ou
+#' uma 'string' em um variável.
+#'
+#' Na programação, uma 'string' é um conjunto de caracteres. Por exemplo, 'A' é
+#' um único caractere e "Apple" é uma string.
+#'
+#' Você pode usar aspas simples '' ou aspas duplas "" para representar strings.
+#' Em geral, usamos: '' para caracteres "" para strings
 
 # create a string variable
 fruit <- "Apple"
@@ -85,18 +97,22 @@ print(class(fruit))
 my_char <- 'A'
 print(class(my_char))
 
-#' Here, both the variables - fruit and my_char - are of character data type.
+#' Aqui, ambas as variáveis - fruit e my_char - são do tipo de dados de
+#' caractere.
 
-#' ### 6. Raw Data Type
+
+# Raw Data Type -----------------------------------------------------------
+
+#' ### Raw Data Type
 #'
-#' A raw data type specifies values as raw bytes. You can use the following
-#' methods to convert character data types to a raw data type and vice-versa:
-#' 
-#' charToRaw() - converts character data to raw data
-#' 
-#' rawToChar() - converts raw data to character data
-#' 
-#' For example,
+#' Um dado do tipo bruto (raw) especifica valores como bytes brutos. Você pode usar
+#' o seguinte métodos para converter tipos de dados de caracteres em um tipo de
+#' dados brutos e vice-versa:
+#'
+#' charToRaw() - converte dados de caracteres em dados brutos
+#'
+#' rawToChar() - converte dados brutos em dados de caracteres
+
 
 # convert character to raw
 raw_variable <- charToRaw("Nivelamento de R")
@@ -110,17 +126,14 @@ char_variable <- rawToChar(raw_variable)
 print(char_variable)
 print(class(char_variable))
 
-
-#' In this program,
+#' Neste programa, Primeiro usamos a função charToRaw() para converter a string
+#' "Nivelamento de R" para bytes.
 #'
-#' We have first used the charToRaw() function to convert the string
-#' "Nivelamento de R to raw bytes.
+#' É por isso que obtemos "raw" como saída quando imprimimos a classe de
+#' raw_variable. Em seguida, usamos a função rawToChar() para converter os dados
+#' em raw_variable de volta ao formato de caractere.
 #'
-#' This is why we get "raw" as output when we print the class of raw_variable.
-#' Then, we have used the rawToChar() function to convert the data in
-#' raw_variable back to character form.
-#'
-#' This is why we get "character" as output when we print the class of
+#' É por isso que obtemos "caractere" como saída quando imprimimos a classe de
 #' char_variable.
 
 

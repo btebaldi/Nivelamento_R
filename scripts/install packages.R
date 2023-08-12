@@ -67,7 +67,7 @@ pck_list <- c(
 
 
 x <- readline("Instalar pacotes? [Yes/No]")
-if(x %in% c("Yes", "yes")){
+if(x %in% c("Yes", "yes", "Y",  "y")){
   cat(sprintf("\nInstalando os pacotes.\n"))
   install.packages(pck_list)
 }
