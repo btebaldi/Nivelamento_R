@@ -1,24 +1,20 @@
-
-variavel1 <- 30
-variavel2 <- 50
-
-variavel1 + variavel2
-
-source(file = "./scripts/Aula 4 - Projeto/Aula 4 - OiMundo.R",
-       encoding = "UTF-8")
-
-print(variavel1 * variavel2)
+#' ---
+#' title: "Funcoes nativas"
+#' author: "Bruno Tebaldi de Queiroz Barbosa"
+#' date: "2023-02-04"
+#' output: html_document
+#' ---
+#' 
 
 
 # Repeticao ---------------------------------------------------------------
 
 
-
 print("* * * * * * * * * * * * * * * * * * * * *")
 
 frase <- rep("*", 8)
+frase
 paste(frase, collapse = " ")
-
 
 
 # Sequencia ---------------------------------------------------------------
@@ -31,17 +27,11 @@ minhasDatas <- seq(from = as.Date("2020-01-01"),
     to = as.Date("2020-05-01"),
     by = "month")
 
+
+# Reversao ----------------------------------------------------------------
+
 rev(minhasDatas)
 
-
-
-# Funcoes -----------------------------------------------------------------
-
-source("./CobbDouglasFunction.R")
-
-CobbDouglas(5, 10)
-CobbDouglasAdvanced(5, 10)
-CobbDouglasAdvanced(5, 10, alpha = 0.3)
 
 
 

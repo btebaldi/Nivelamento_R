@@ -1,4 +1,3 @@
-
 RaizesQuadratica <- function(A, B, C){
   
   # Total de linhas nos vetores
