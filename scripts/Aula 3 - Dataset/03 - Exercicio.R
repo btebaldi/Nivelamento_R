@@ -1,10 +1,13 @@
-
+#' ---
+#' title: "Exercicio"
+#' author: "Bruno Tebaldi de Queiroz Barbosa"
+#' date: "2023-02-04"
+#' output: html_document
+#' ---
+#' 
 
 # Setup -------------------------------------------------------------------
-
 rm(list=ls())
-# cat("\014") # lipeza do console
-
 
 library(readr)
 library(readxl)
@@ -14,80 +17,24 @@ library(dplyr)
 
 # Data Load ---------------------------------------------------------------
 
-tbl_Notas <- read_csv("databases/Modulo4_AlunosNotas.csv")
-
-tbl_Info <- read_excel("databases/Modulo4_AlunosInfo.xlsx", 
+tbl_Notas <- read_csv("./scripts/Aula 3 - Dataset/database/AlunosNotas.csv")
+tbl_Info <- read_excel("./scripts/Aula 3 - Dataset/database/AlunosInfo.xlsx", 
                        sheet = "AlunosNotas")
 
-
-# head(tabela)
-# head(Modulo4_AlunosInfo)
-
-
-summary(tbl_Notas)
-summary(tbl_Info)
-
-
-
-
-# arrange -----------------------------------------------------------------
-
-tbl_Notas = arrange(tbl_Notas, P1, desc(P2))
-
-
-
-# Mutate ------------------------------------------------------------------
-
-tbl_Notas = mutate(tbl_Notas,
-                   MediaProva = (P1+P2)/2,
-                   MediaLista = (TR + LT)/2,
-                   MediaTotal = MediaLista*0.4+MediaProva*0.6 )
-
-
-tbl_Notas$PontExtra <- 0.5
-
-tbl_Notas$PontExtra <- NULL 
-
-
-# Select ------------------------------------------------------------------
-
-tbl_Notas_2 <- select(tbl_Notas, P1, P2, MediaProva)
-
-
-# Filter ------------------------------------------------------------------
-
-tbl_Notas_2
-
-
-filter(tbl_Notas_2, P2 >= 6, P1 >= 6)
-
-
-filter(tbl_Notas_2, (P2 >= 6) | (P1 >= 6))
-
-
-ImputUsuario <- as.numeric(readline("DIGITAR NOTA DE CORTE: "))
-
-ImputUsuario <- 6
-
-tbl_Notas_2 <- filter(tbl_Notas_2, P2 >= ImputUsuario)
-
-
-rm(list = c("tbl_Notas_2"))
 
 # A soma total de todas as provas para cada aluno.
 tbl_Notas <- mutate(tbl_Notas, SomaProva = P1 + P2)
 
-# Calcule a media de cada aluno, sabendo que os pesos s~ao: TR = 0:1,
-# LT = 0:2, P1 = 0:3 e P2 = 0:4
+# Calcule a media de cada aluno, sabendo que os pesos s~ao: TR = 0:1, LT = 0:2,
+# P1 = 0:3 e P2 = 0:4
 tbl_Notas <- mutate(tbl_Notas, Media = TR*0.1 + LT*0.2 + P1*0.3 + P2*0.4)
 
-# Selecione apenas as colunas Id e as Media.
+# Selecione apenas as colunas Id e as Media.
 tbl_selecao <- select(tbl_Notas, id, Media)
 
-# A partir do resultado anterior, ordene os dados do melhor aluno para o
-# pior aluno.
+# A partir do resultado anterior, ordene os dados do melhor aluno para o pior
+# aluno.
 arrange(tbl_selecao, desc(Media))
-
 
 
 # Summarise / Group by ----------------------------------------------------
