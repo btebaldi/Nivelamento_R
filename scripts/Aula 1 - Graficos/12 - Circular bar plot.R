@@ -123,7 +123,10 @@ p <- ggplot(data) +
   coord_polar() +
   
   # Add labels on top of each bar
-  geom_text(data=label_data, aes(x=id, y=tot+10, label=individual, hjust=hjust), color="black", fontface="bold",alpha=0.6, size=3, angle= label_data$angle, inherit.aes = FALSE ) 
+  geom_text(data=label_data, aes(x=id, y=tot+10, label=individual, hjust=hjust),
+            color="black",
+            fontface="bold",
+            alpha=0.6, linewidth=3, angle= label_data$angle, inherit.aes = FALSE ) 
 
 # Add base line information
 # geom_segment(data=base_data, aes(x = start, y = -5, xend = end, yend = -5), colour = "black", alpha=0.8, size=0.6 , inherit.aes = FALSE )  +
@@ -133,4 +136,4 @@ p <- ggplot(data) +
 # Save at png
 # ggsave(p, file="output.png", width=10, height=10)
 
-
+print(p)
