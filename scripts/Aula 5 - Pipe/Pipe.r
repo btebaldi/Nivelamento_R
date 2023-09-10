@@ -12,88 +12,59 @@
 # Setup -------------------------------------------------------------------
 
 rm(list = ls())
-
-library(readxl)
 library(dplyr)
-library(lubridate)
 library(ggplot2)
-
-
 
 
 # Dataload ----------------------------------------------------------------
 
-ITUB <- read_excel("P:/Teo/ITUB BBDC.xlsx", 
-                   sheet = "Worksheet",
-                   col_names = TRUE, 
-                   col_types = c("date", "numeric", "numeric"), 
-                   range = cell_limits(ul = c(7, 1), lr = c(NA, 3)),
-                   na = "na")
+data("ChickWeight")
 
 
-BBDC <- read_excel("P:/Teo/ITUB BBDC.xlsx", 
-                   sheet = "Worksheet",
-                   col_names = TRUE, 
-                   col_types = c("date", "numeric", "numeric"), 
-                   range = cell_limits(ul = c(7, 5), lr = c(NA, 7)),
-                   na = "na")
+# Sem a utilizacao de Pipe ------------------------------------------------
+
+# Crio uma nova coluna
+tbl_1 <- mutate(ChickWeight, ln_weight = log(weight))
+
+# Informa a maneira de se agrupar os dados
+tbl_2 <- group_by(tbl_1, Diet)
+
+# Faco um agrupamento
+tbl_3 <- summarise(tbl_2, mu.wight = mean(ln_weight),
+                   sd.wight = mean(ln_weight),
+                   qtd = n())
+
+# A partir dos dados agurpados fa ̧co um grafico
+ggplot(tbl_3) + geom_col(aes(x=Diet, y=mu.wight))
 
 
+# Utilizando o Pipe do tidyverse ------------------------------------------
 
-# Data regularization & Data preparation ----------------------------------
-
-# Normaliza colunas de datas
-ITUB$Date <- as.Date(ITUB$Date)
-BBDC$Date <- as.Date(BBDC$Date)
-
-# calcula ao range de datas a ser trabalhado
-mRangex <- range(c(ITUB$Date, BBDC$Date), na.rm = TRUE)
-
-# Cria uma tabela com todos os dados
-tbl <- tibble(Date = seq(from = mRangex[1], to = mRangex[2], by = 1))
-tbl <- tbl |> mutate(WeekDay = wday(Date))
-tbl <- tbl |>
-  left_join(ITUB, by=c("Date")) |> 
-  select(Date, WeekDay, ITUB = PX_LAST, ITUB_VOL = PX_VOLUME) |> 
-  left_join(BBDC, by=c("Date")) |> 
-  select(Date, WeekDay, ITUB, ITUB_VOL, 
-         BBDC = PX_LAST, BBDC_VOL = PX_VOLUME)
-
-# limpeza de variaveis nao mais utilizadas
-rm(list = c("BBDC", "ITUB", "mRangex"))
+rm(list = ls())
+library(dplyr)
+library(ggplot2)
 
 
-# User defined function ---------------------------------------------------
+ChickWeight %>%
+  mutate(weight = log(weight)) %>%
+  group_by(Diet) %>%
+  summarise(mu.wight = mean(weight),
+            sd.wight = mean(weight),
+            qtd = n()) %>%
+  ggplot() +
+  geom_col(aes(x=Diet, y=mu.wight))
 
-CalculaRetorno = function(x){
-  ret <- x/lag(x)
-  return(ret)
-}
+# Utilizando o Pipe do nativo (4.1+) --------------------------------------
 
-# opcao de implementacao 1 ------------------------------------------------
+rm(list = ls())
+library(dplyr)
+library(ggplot2)
 
-tbl_1 <- filter(tbl, !is.na(BBDC) &  !is.na(ITUB))
-tbl_2 <- arrange(tbl_1, Date)
-tbl_3 <- select(tbl_2, ITUB, BBDC)
-tbl_4 <- mutate(tbl_3, r_ITUB = CalculaRetorno(ITUB), r_BBDC = CalculaRetorno(BBDC))
-tbl_5 <- select(tbl_4, r_ITUB, r_BBDC)
-tbl_6 <- na.omit(tbl_5)
-cov(tbl_6)
-
-
-# opcao de implementacao 2 ------------------------------------------------
-
-cov(na.omit(select(mutate(select(arrange(filter(tbl, !is.na(BBDC) &  !is.na(ITUB)), Date), ITUB, BBDC), r_ITUB = CalculaRetorno(ITUB), r_BBDC = CalculaRetorno(BBDC)), r_ITUB, r_BBDC)))
-
-# opcao de implementacao 2 ------------------------------------------------
-
-
-tbl |> 
-  filter(!is.na(BBDC) &  !is.na(ITUB)) |> 
-  arrange(Date) |> 
-  select(ITUB, BBDC) |> 
-  mutate(r_ITUB = CalculaRetorno(ITUB), r_BBDC = CalculaRetorno(BBDC)) |> 
-  select(r_ITUB, r_BBDC) |> 
-  na.omit() |> 
-  cov()
-
+ChickWeight |>
+  mutate(weight = log(weight)) |>
+  group_by(Diet) |>
+  summarise(mu.wight = mean(weight),
+            sd.wight = mean(weight),
+            qtd = n()) |>
+  ggplot() +
+  geom_col(aes(x=Diet, y=mu.wight))
