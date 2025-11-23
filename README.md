@@ -69,9 +69,9 @@ Para citar este repositório, arquivos ou materiais associados, utilize o format
 Barbosa, B. T. (2025). Repositório GitHub: Curso de Nivelamento em R (fundamentos e boas práticas). Disponível em https://github.com/btebaldi/Nivelamento_R.
 
 
-@misc{barbosa2025Nivelamento_r,
-author = {Barbosa, Bruno Tebaldi},
-title = {Repositório GitHub: {Curso de Nivelamento em R (fundamentos e boas práticas)},
-year = {2025},
-howpublished = {\url{https://github.com/btebaldi/Nivelamento_R}}
+> @misc{barbosa2025Nivelamento_r,  
+author = {Barbosa, Bruno Tebaldi},  
+title = {Repositório GitHub: {Curso de Nivelamento em R (fundamentos e boas práticas)},  
+year = {2025},  
+howpublished = {\url{https://github.com/btebaldi/Nivelamento_R}}  
 }
